@@ -6,7 +6,6 @@ import static name.remal.gradle_plugins.toolkit.ExtensionContainerUtils.getOptio
 import static name.remal.gradle_plugins.toolkit.PredicateUtils.not;
 
 import java.io.File;
-import java.util.Collection;
 import java.util.List;
 import javax.annotation.Nullable;
 import lombok.val;
@@ -28,7 +27,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
     }
 
 
-    private void configureFinalizedBy(Project project) {
+    private static void configureFinalizedBy(Project project) {
         project.getTasks()
             .matching(task -> !(task instanceof JacocoBase))
             .configureEach(task ->
@@ -36,11 +35,8 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             );
     }
 
-    private List<Object> getFinalizedBy(Task task) {
-        val taskExecutionDataFile = getOptionalExtension(task, JacocoTaskExtension.class)
-            .map(JacocoTaskExtension::getDestinationFile)
-            .map(File::getAbsoluteFile)
-            .orElse(null);
+    private static List<Object> getFinalizedBy(Task task) {
+        val taskExecutionDataFile = getTaskExecutionDataFile(task);
         if (taskExecutionDataFile == null) {
             return emptyList();
         }
@@ -49,17 +45,14 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             .filter(JacocoReportBase.class::isInstance)
             .map(JacocoReportBase.class::cast)
             .filter(reportTask -> {
-                val reportExecutionDataFile = singleOrNullFile(reportTask.getExecutionData().getFiles());
-                if (reportExecutionDataFile == null) {
-                    return false;
-                }
-                return reportExecutionDataFile.equals(taskExecutionDataFile);
+                val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
+                return reportExecutionDataFile != null && reportExecutionDataFile.equals(taskExecutionDataFile);
             })
             .collect(toList());
     }
 
 
-    private void configureDependsOn(Project project) {
+    private static void configureDependsOn(Project project) {
         project.getTasks()
             .withType(JacocoReportBase.class)
             .configureEach(reportTask ->
@@ -67,8 +60,8 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             );
     }
 
-    private List<Object> getDependsOn(JacocoReportBase reportTask) {
-        val reportExecutionDataFile = singleOrNullFile(reportTask.getExecutionData().getFiles());
+    private static List<Object> getDependsOn(JacocoReportBase reportTask) {
+        val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
         if (reportExecutionDataFile == null) {
             return emptyList();
         }
@@ -76,27 +69,29 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
         return reportTask.getProject().getTasks().stream()
             .filter(not(JacocoBase.class::isInstance))
             .filter(task -> {
-                val taskExecutionDataFile = getOptionalExtension(task, JacocoTaskExtension.class)
-                    .map(JacocoTaskExtension::getDestinationFile)
-                    .map(File::getAbsoluteFile)
-                    .orElse(null);
-                if (taskExecutionDataFile == null) {
-                    return false;
-                }
-
-                return taskExecutionDataFile.equals(reportExecutionDataFile);
+                val taskExecutionDataFile = getTaskExecutionDataFile(task);
+                return taskExecutionDataFile != null && taskExecutionDataFile.equals(reportExecutionDataFile);
             })
             .collect(toList());
     }
 
 
     @Nullable
-    private static File singleOrNullFile(Collection<? extends File> collection) {
-        if (collection.size() == 1) {
-            return collection.iterator().next().getAbsoluteFile();
+    private static File getTaskExecutionDataFile(Task task) {
+        return getOptionalExtension(task, JacocoTaskExtension.class)
+            .map(JacocoTaskExtension::getDestinationFile)
+            .map(File::getAbsoluteFile)
+            .orElse(null);
+    }
+
+    @Nullable
+    private static File getReportExecutionDataFile(JacocoReportBase reportTask) {
+        val files = reportTask.getExecutionData().getFiles();
+        if (files.size() != 1) {
+            return null;
         }
 
-        return null;
+        return files.iterator().next().getAbsoluteFile();
     }
 
 }
