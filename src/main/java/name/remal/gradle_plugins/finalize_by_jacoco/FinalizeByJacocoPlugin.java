@@ -4,6 +4,7 @@ import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 import static name.remal.gradle_plugins.toolkit.ExtensionContainerUtils.getOptionalExtension;
 import static name.remal.gradle_plugins.toolkit.PredicateUtils.not;
+import static name.remal.gradle_plugins.toolkit.TaskUtils.onlyIfWithReason;
 
 import java.io.File;
 import java.util.List;
@@ -20,10 +21,22 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        project.getPluginManager().withPlugin("jacoco", __ -> {
-            configureFinalizedBy(project);
-            configureDependsOn(project);
-        });
+        project.getPluginManager().apply("jacoco");
+        configureOnlyIf(project);
+        configureFinalizedBy(project);
+        configureDependsOn(project);
+    }
+
+
+    private static void configureOnlyIf(Project project) {
+        project.getTasks()
+            .withType(JacocoReportBase.class)
+            .configureEach(it ->
+                onlyIfWithReason(it, "Any of the execution data files exists", reportTask ->
+                    reportTask.getExecutionData().getFiles().stream()
+                        .anyMatch(File::exists)
+                )
+            );
     }
 
 
