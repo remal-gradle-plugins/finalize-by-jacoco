@@ -30,10 +30,6 @@ class FinalizeByJacocoPluginFunctionalTest {
                 test.append("useJUnitPlatform()");
             });
 
-            build.appendBlock("tasks.jacocoTestReport", taskBlock -> {
-                taskBlock.append("reports.xml.outputLocation = file('build/jacoco.xml')");
-            });
-
             build.addMavenCentralRepository();
             build.appendBlock("dependencies", deps -> {
                 deps.append("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
