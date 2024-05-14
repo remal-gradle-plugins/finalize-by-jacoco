@@ -50,6 +50,11 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
 
     private static List<Object> getFinalizedBy(Task task) {
         val taskExecutionDataFile = getTaskExecutionDataFile(task);
+        task.getLogger().quiet(
+            "{}: finalizedBy: taskExecutionDataFile: {}",
+            task,
+            taskExecutionDataFile
+        );
         if (taskExecutionDataFile == null) {
             return emptyList();
         }
@@ -59,7 +64,13 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             .map(JacocoReportBase.class::cast)
             .filter(reportTask -> {
                 val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
-                return reportExecutionDataFile != null && reportExecutionDataFile.equals(taskExecutionDataFile);
+                reportTask.getLogger().quiet(
+                    "  {}: reportExecutionDataFile: {}: {}",
+                    reportTask,
+                    reportExecutionDataFile,
+                    taskExecutionDataFile.equals(reportExecutionDataFile)
+                );
+                return taskExecutionDataFile.equals(reportExecutionDataFile);
             })
             .collect(toList());
     }
@@ -75,6 +86,11 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
 
     private static List<Object> getDependsOn(JacocoReportBase reportTask) {
         val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
+        reportTask.getLogger().quiet(
+            "dependsOn: {}: reportExecutionDataFile: {}",
+            reportTask,
+            reportExecutionDataFile
+        );
         if (reportExecutionDataFile == null) {
             return emptyList();
         }
@@ -83,7 +99,13 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             .filter(not(JacocoBase.class::isInstance))
             .filter(task -> {
                 val taskExecutionDataFile = getTaskExecutionDataFile(task);
-                return taskExecutionDataFile != null && taskExecutionDataFile.equals(reportExecutionDataFile);
+                task.getLogger().quiet(
+                    "  {}: taskExecutionDataFile: {}: {}",
+                    task,
+                    taskExecutionDataFile,
+                    reportExecutionDataFile.equals(taskExecutionDataFile)
+                );
+                return reportExecutionDataFile.equals(taskExecutionDataFile);
             })
             .collect(toList());
     }
