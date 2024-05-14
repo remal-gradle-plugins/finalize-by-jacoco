@@ -50,7 +50,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
 
     private static List<Object> getFinalizedBy(Task task) {
         val taskExecutionDataFile = getTaskExecutionDataFile(task);
-        task.getLogger().quiet(
+        task.getLogger().debug(
             "{}: finalizedBy: taskExecutionDataFile: {}",
             task,
             taskExecutionDataFile
@@ -64,7 +64,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             .map(JacocoReportBase.class::cast)
             .filter(reportTask -> {
                 val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
-                reportTask.getLogger().quiet(
+                reportTask.getLogger().debug(
                     "  {}: reportExecutionDataFile: {}: {}",
                     reportTask,
                     reportExecutionDataFile,
@@ -86,7 +86,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
 
     private static List<Object> getDependsOn(JacocoReportBase reportTask) {
         val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
-        reportTask.getLogger().quiet(
+        reportTask.getLogger().debug(
             "dependsOn: {}: reportExecutionDataFile: {}",
             reportTask,
             reportExecutionDataFile
@@ -99,7 +99,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             .filter(not(JacocoBase.class::isInstance))
             .filter(task -> {
                 val taskExecutionDataFile = getTaskExecutionDataFile(task);
-                task.getLogger().quiet(
+                task.getLogger().debug(
                     "  {}: taskExecutionDataFile: {}: {}",
                     task,
                     taskExecutionDataFile,

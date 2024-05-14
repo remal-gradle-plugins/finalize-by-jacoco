@@ -5,7 +5,6 @@ import static java.util.stream.Collectors.toList;
 import static name.remal.gradle_plugins.toolkit.testkit.GradleDependencyVersions.getExternalPluginToTestVersion;
 import static name.remal.gradle_plugins.toolkit.testkit.GradleDependencyVersions.getJUnitVersion;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.gradle.testkit.runner.TaskOutcome.SUCCESS;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -64,7 +63,6 @@ class FinalizeByJacocoPluginFunctionalTest {
         val buildResult = project.assertBuildSuccessfully();
 
         val successfullyExecutedTasks = buildResult.getTasks().stream()
-            .filter(task -> task.getOutcome().equals(SUCCESS))
             .map(BuildTask::getPath)
             .collect(toList());
         assertThat(successfullyExecutedTasks)
@@ -77,7 +75,6 @@ class FinalizeByJacocoPluginFunctionalTest {
         val buildResult = project.assertBuildSuccessfully();
 
         val successfullyExecutedTasks = buildResult.getTasks().stream()
-            .filter(task -> task.getOutcome().equals(SUCCESS))
             .map(BuildTask::getPath)
             .collect(toList());
         assertThat(successfullyExecutedTasks)
@@ -90,7 +87,6 @@ class FinalizeByJacocoPluginFunctionalTest {
         val buildResult = project.assertBuildSuccessfully();
 
         val successfullyExecutedTasks = buildResult.getTasks().stream()
-            .filter(task -> task.getOutcome().equals(SUCCESS))
             .map(BuildTask::getPath)
             .collect(toList());
         assertThat(successfullyExecutedTasks)
@@ -134,7 +130,6 @@ class FinalizeByJacocoPluginFunctionalTest {
             val buildResult = project.assertBuildSuccessfully();
 
             val successfullyExecutedTasks = buildResult.getTasks().stream()
-                .filter(task -> task.getOutcome().equals(SUCCESS))
                 .map(BuildTask::getPath)
                 .collect(toList());
             assertThat(successfullyExecutedTasks)
@@ -147,7 +142,6 @@ class FinalizeByJacocoPluginFunctionalTest {
             val buildResult = project.assertBuildSuccessfully();
 
             val successfullyExecutedTasks = buildResult.getTasks().stream()
-                .filter(task -> task.getOutcome().equals(SUCCESS))
                 .map(BuildTask::getPath)
                 .collect(toList());
             assertThat(successfullyExecutedTasks)
@@ -160,7 +154,6 @@ class FinalizeByJacocoPluginFunctionalTest {
             val buildResult = project.assertBuildSuccessfully();
 
             val successfullyExecutedTasks = buildResult.getTasks().stream()
-                .filter(task -> task.getOutcome().equals(SUCCESS))
                 .map(BuildTask::getPath)
                 .collect(toList());
             assertThat(successfullyExecutedTasks)
