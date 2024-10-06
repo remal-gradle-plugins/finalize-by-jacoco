@@ -1,7 +1,7 @@
 # This file is generated automatically by `collectAllGradlePluginApiDependencies` Gradle task.
 # Do not modify it yourself unless you know what you are doing.
 
-org.ow2.asm:asm-bom:9.7:@pom
+org.ow2.asm:asm-bom:9.7.1:@pom
 zzzz-classes-that-rely-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.DebugUtils$1:e524b1467475f6f9fba3590a9251175825a2e204e6a7e6f3b77c3c690b674d6e
 zzzz-classes-that-rely-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.DebugUtils$IfDebugEnabled:98e22bfc44f680ef7fe8ab9e0511da1b0a0524c54bc65f583f89ed38b4d75de6
 zzzz-classes-that-rely-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.DebugUtils:dc1cc4e8323a7c238b063c38a124e1e65715303542cd94968f03c7d2993cee48
