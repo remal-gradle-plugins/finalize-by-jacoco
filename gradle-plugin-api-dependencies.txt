@@ -2,6 +2,7 @@
 # Do not modify it yourself unless you know what you are doing.
 
 org.ow2.asm:asm-bom:9.7.1:@pom
+zzzz-classes-relying-on-external-dependency:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.LatestLtsJdkModules:5dbceb4dec21ad4eec4bf35b991cc4bebda6c899d675165fa771055a0f2043a0
 zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.DebugUtils$1:e524b1467475f6f9fba3590a9251175825a2e204e6a7e6f3b77c3c690b674d6e
 zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.DebugUtils$IfDebugEnabled:98e22bfc44f680ef7fe8ab9e0511da1b0a0524c54bc65f583f89ed38b4d75de6
 zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.DebugUtils:dc1cc4e8323a7c238b063c38a124e1e65715303542cd94968f03c7d2993cee48
@@ -9,4 +10,8 @@ zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_b
 zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.Version:f1dc10dd514fda89474750d2f3f5ef2561793e7f44dd2b9a4514faaec434d5
 zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtils$1$1:a92408f740a1f0ebe65889f4855d34b5a502fe87c926724f7e73d99cc1e8e7cb
 zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtils$1:94a35af90600524ce20772072b6e71465912ceae884a3c53a28f311cfad3f9be
-zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtils:c1c8d9800be6f6f0da404af3917ef9a020544f58b88c665898ede9d30007f6d9
+zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtils:ead4f0efe91a070859ff6848063a8b2131781d576ff8076eabc538a6e5abbc1c
+zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtilsMethods:76284c26ba0dae896395623f6a7146109d1ced373379e1f6223640f28b16f403
+zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtilsMethods_8_lte$UrlResourcesOnlyClassLoader:14802755b2ac80d13ed29bb6d206b84bfb4b8a892dfc12b9919d822bbee5a09e
+zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtilsMethods_8_lte:a3398e8b8844f137735b7f21b5d6e57b29d1f754a6d5aa83e54b56dc0ab602f8
+zzzz-classes-relying-on-gradle-internal-api:name.remal.gradle_plugins.finalize_by_jacoco.internal._relocated.name.remal.gradle_plugins.toolkit.reflection.ReflectionUtilsMethods_9_gte:f5302c53759a175f1e7a29e882ec99f40bfc26544c2f18449b249dc1aa473788
