@@ -6,6 +6,12 @@
 
 [![configuration cache: supported](https://img.shields.io/static/v1?label=configuration%20cache&message=supported&color=success)](https://docs.gradle.org/current/userguide/configuration_cache.html)
 
+Usage:
+
+<!--plugin-usage:name.remal.finalize-by-jacoco--><!--/plugin-usage-->
+
+&nbsp;
+
 By default, Gradle doesn't make Jacoco tasks executed automatically. This plugin fixes this.
 
 This plugin applies [`jacoco` plugin](https://docs.gradle.org/current/userguide/jacoco_plugin.html) and then
