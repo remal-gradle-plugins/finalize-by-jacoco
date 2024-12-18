@@ -1,6 +1,6 @@
 **Tested on Java LTS versions from <!--property:java-runtime.min-version-->8<!--/property--> to <!--property:java-runtime.max-version-->21<!--/property-->.**
 
-**Tested on Gradle versions from <!--property:gradle-api.min-version-->6.0<!--/property--> to <!--property:gradle-api.max-version-->8.12-rc-1<!--/property-->.**
+**Tested on Gradle versions from <!--property:gradle-api.min-version-->6.0<!--/property--> to <!--property:gradle-api.max-version-->8.12-rc-2<!--/property-->.**
 
 # `name.remal.finalize-by-jacoco` plugin
 
@@ -11,7 +11,7 @@ Usage:
 <!--plugin-usage:name.remal.finalize-by-jacoco-->
 ```groovy
 plugins {
-    id 'name.remal.finalize-by-jacoco' version '1.0.4'
+    id 'name.remal.finalize-by-jacoco' version '1.0.5'
 }
 ```
 <!--/plugin-usage-->
