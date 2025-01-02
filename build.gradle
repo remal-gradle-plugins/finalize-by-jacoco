@@ -28,7 +28,7 @@ apply plugin: 'name.remal.toolkit.build-logic'
 apply plugin: 'java-gradle-plugin'
 
 dependencies {
-    externalPluginsToTest 'name.remal.test-source-sets:name.remal.test-source-sets.gradle.plugin:4.1.9'
+    externalPluginsToTest 'name.remal.test-source-sets:name.remal.test-source-sets.gradle.plugin:4.1.10'
 }
 
 gradlePlugin {
