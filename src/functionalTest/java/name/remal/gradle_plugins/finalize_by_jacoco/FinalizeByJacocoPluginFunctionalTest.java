@@ -25,16 +25,16 @@ class FinalizeByJacocoPluginFunctionalTest {
             build.applyPlugin("name.remal.finalize-by-jacoco");
 
             build.applyPlugin("java");
-            build.appendBlock("tasks.test", test -> {
-                test.append("useJUnitPlatform()");
+            build.block("tasks.test", test -> {
+                test.line("useJUnitPlatform()");
             });
 
             build.addMavenCentralRepository();
-            build.appendBlock("dependencies", deps -> {
-                deps.append("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
-                deps.append("testImplementation 'org.junit.jupiter:junit-jupiter-api'");
-                deps.append("testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'");
-                deps.append("testRuntimeOnly 'org.junit.platform:junit-platform-launcher'");
+            build.block("dependencies", deps -> {
+                deps.line("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
+                deps.line("testImplementation 'org.junit.jupiter:junit-jupiter-api'");
+                deps.line("testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'");
+                deps.line("testRuntimeOnly 'org.junit.platform:junit-platform-launcher'");
             });
         });
 
@@ -59,8 +59,7 @@ class FinalizeByJacocoPluginFunctionalTest {
 
     @Test
     void testTaskIsFinalizedByJacoco() {
-        project.getBuildFile().registerDefaultTask("test");
-        val buildResult = project.assertBuildSuccessfully();
+        val buildResult = project.assertBuildSuccessfully("test");
 
         val successfullyExecutedTasks = buildResult.getTasks().stream()
             .map(BuildTask::getPath)
@@ -71,8 +70,7 @@ class FinalizeByJacocoPluginFunctionalTest {
 
     @Test
     void jacocoReportDependsOnTest() {
-        project.getBuildFile().registerDefaultTask("jacocoTestReport");
-        val buildResult = project.assertBuildSuccessfully();
+        val buildResult = project.assertBuildSuccessfully("jacocoTestReport");
 
         val successfullyExecutedTasks = buildResult.getTasks().stream()
             .map(BuildTask::getPath)
@@ -83,8 +81,7 @@ class FinalizeByJacocoPluginFunctionalTest {
 
     @Test
     void jacocoCoverageVerificationDependsOnTest() {
-        project.getBuildFile().registerDefaultTask("jacocoTestCoverageVerification");
-        val buildResult = project.assertBuildSuccessfully();
+        val buildResult = project.assertBuildSuccessfully("jacocoTestCoverageVerification");
 
         val successfullyExecutedTasks = buildResult.getTasks().stream()
             .map(BuildTask::getPath)
@@ -103,7 +100,7 @@ class FinalizeByJacocoPluginFunctionalTest {
                 "name.remal.test-source-sets",
                 getExternalPluginToTestVersion("name.remal.test-source-sets")
             );
-            project.getBuildFile().append("testSourceSets.create('integrationTest')");
+            project.getBuildFile().line("testSourceSets.create('integrationTest')");
 
             project.writeTextFile("src/integrationTest/java/pkg/ClazzIntegrationTest.java", join(
                 "\n",
@@ -126,8 +123,7 @@ class FinalizeByJacocoPluginFunctionalTest {
 
         @Test
         void integrationTestTaskIsFinalizedByJacoco() {
-            project.getBuildFile().registerDefaultTask("integrationTest");
-            val buildResult = project.assertBuildSuccessfully();
+            val buildResult = project.assertBuildSuccessfully("integrationTest");
 
             val successfullyExecutedTasks = buildResult.getTasks().stream()
                 .map(BuildTask::getPath)
@@ -138,8 +134,7 @@ class FinalizeByJacocoPluginFunctionalTest {
 
         @Test
         void jacocoReportDependsOnIntegrationTest() {
-            project.getBuildFile().registerDefaultTask("jacocoIntegrationTestReport");
-            val buildResult = project.assertBuildSuccessfully();
+            val buildResult = project.assertBuildSuccessfully("jacocoIntegrationTestReport");
 
             val successfullyExecutedTasks = buildResult.getTasks().stream()
                 .map(BuildTask::getPath)
@@ -150,8 +145,7 @@ class FinalizeByJacocoPluginFunctionalTest {
 
         @Test
         void jacocoCoverageVerificationDependsOnIntegrationTest() {
-            project.getBuildFile().registerDefaultTask("jacocoIntegrationTestCoverageVerification");
-            val buildResult = project.assertBuildSuccessfully();
+            val buildResult = project.assertBuildSuccessfully("jacocoIntegrationTestCoverageVerification");
 
             val successfullyExecutedTasks = buildResult.getTasks().stream()
                 .map(BuildTask::getPath)
