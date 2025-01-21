@@ -11,7 +11,7 @@ Usage:
 <!--plugin-usage:name.remal.finalize-by-jacoco-->
 ```groovy
 plugins {
-    id 'name.remal.finalize-by-jacoco' version '1.0.6'
+    id 'name.remal.finalize-by-jacoco' version '2.0.0'
 }
 ```
 <!--/plugin-usage-->
