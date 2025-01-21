@@ -1,7 +1,7 @@
 package name.remal.gradle_plugins.finalize_by_jacoco;
 
 import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 import static name.remal.gradle_plugins.toolkit.ExtensionContainerUtils.getOptionalExtension;
 import static name.remal.gradle_plugins.toolkit.PredicateUtils.not;
 import static name.remal.gradle_plugins.toolkit.TaskUtils.onlyIfWithReason;
@@ -9,7 +9,6 @@ import static name.remal.gradle_plugins.toolkit.TaskUtils.onlyIfWithReason;
 import java.io.File;
 import java.util.List;
 import javax.annotation.Nullable;
-import lombok.val;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -49,7 +48,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
     }
 
     private static List<Object> getFinalizedBy(Task task) {
-        val taskExecutionDataFile = getTaskExecutionDataFile(task);
+        var taskExecutionDataFile = getTaskExecutionDataFile(task);
         if (taskExecutionDataFile == null) {
             return emptyList();
         }
@@ -58,10 +57,10 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
             .filter(JacocoReportBase.class::isInstance)
             .map(JacocoReportBase.class::cast)
             .filter(reportTask -> {
-                val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
+                var reportExecutionDataFile = getReportExecutionDataFile(reportTask);
                 return taskExecutionDataFile.equals(reportExecutionDataFile);
             })
-            .collect(toList());
+            .collect(toUnmodifiableList());
     }
 
 
@@ -74,7 +73,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
     }
 
     private static List<Object> getDependsOn(JacocoReportBase reportTask) {
-        val reportExecutionDataFile = getReportExecutionDataFile(reportTask);
+        var reportExecutionDataFile = getReportExecutionDataFile(reportTask);
         if (reportExecutionDataFile == null) {
             return emptyList();
         }
@@ -82,10 +81,10 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
         return reportTask.getProject().getTasks().stream()
             .filter(not(JacocoBase.class::isInstance))
             .filter(task -> {
-                val taskExecutionDataFile = getTaskExecutionDataFile(task);
+                var taskExecutionDataFile = getTaskExecutionDataFile(task);
                 return reportExecutionDataFile.equals(taskExecutionDataFile);
             })
-            .collect(toList());
+            .collect(toUnmodifiableList());
     }
 
 
@@ -99,7 +98,7 @@ public abstract class FinalizeByJacocoPlugin implements Plugin<Project> {
 
     @Nullable
     private static File getReportExecutionDataFile(JacocoReportBase reportTask) {
-        val files = reportTask.getExecutionData().getFiles();
+        var files = reportTask.getExecutionData().getFiles();
         if (files.size() != 1) {
             return null;
         }

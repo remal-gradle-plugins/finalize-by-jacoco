@@ -64,3 +64,10 @@ If a task has [`JacocoTaskExtension`](https://docs.gradle.org/current/javadoc/or
 Jacoco tasks that work with the same Jacoco execution data file will be matched.
 
 If a Jacoco task works with multiple execution files, it won't be matched.
+
+# Migration guide
+
+## Version 1.* to 2.*
+
+The minimum Java version is 11 (from 8).
+The minimum Gradle version is 7.0 (from 6.0).

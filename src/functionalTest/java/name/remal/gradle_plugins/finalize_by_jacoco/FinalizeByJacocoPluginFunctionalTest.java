@@ -7,7 +7,6 @@ import static name.remal.gradle_plugins.toolkit.testkit.GradleDependencyVersions
 import static org.assertj.core.api.Assertions.assertThat;
 
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import name.remal.gradle_plugins.toolkit.testkit.functional.GradleProject;
 import org.gradle.testkit.runner.BuildTask;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,9 +58,9 @@ class FinalizeByJacocoPluginFunctionalTest {
 
     @Test
     void testTaskIsFinalizedByJacoco() {
-        val buildResult = project.assertBuildSuccessfully("test");
+        var buildResult = project.assertBuildSuccessfully("test");
 
-        val successfullyExecutedTasks = buildResult.getTasks().stream()
+        var successfullyExecutedTasks = buildResult.getTasks().stream()
             .map(BuildTask::getPath)
             .collect(toList());
         assertThat(successfullyExecutedTasks)
@@ -70,9 +69,9 @@ class FinalizeByJacocoPluginFunctionalTest {
 
     @Test
     void jacocoReportDependsOnTest() {
-        val buildResult = project.assertBuildSuccessfully("jacocoTestReport");
+        var buildResult = project.assertBuildSuccessfully("jacocoTestReport");
 
-        val successfullyExecutedTasks = buildResult.getTasks().stream()
+        var successfullyExecutedTasks = buildResult.getTasks().stream()
             .map(BuildTask::getPath)
             .collect(toList());
         assertThat(successfullyExecutedTasks)
@@ -81,9 +80,9 @@ class FinalizeByJacocoPluginFunctionalTest {
 
     @Test
     void jacocoCoverageVerificationDependsOnTest() {
-        val buildResult = project.assertBuildSuccessfully("jacocoTestCoverageVerification");
+        var buildResult = project.assertBuildSuccessfully("jacocoTestCoverageVerification");
 
-        val successfullyExecutedTasks = buildResult.getTasks().stream()
+        var successfullyExecutedTasks = buildResult.getTasks().stream()
             .map(BuildTask::getPath)
             .collect(toList());
         assertThat(successfullyExecutedTasks)
@@ -123,9 +122,9 @@ class FinalizeByJacocoPluginFunctionalTest {
 
         @Test
         void integrationTestTaskIsFinalizedByJacoco() {
-            val buildResult = project.assertBuildSuccessfully("integrationTest");
+            var buildResult = project.assertBuildSuccessfully("integrationTest");
 
-            val successfullyExecutedTasks = buildResult.getTasks().stream()
+            var successfullyExecutedTasks = buildResult.getTasks().stream()
                 .map(BuildTask::getPath)
                 .collect(toList());
             assertThat(successfullyExecutedTasks)
@@ -134,9 +133,9 @@ class FinalizeByJacocoPluginFunctionalTest {
 
         @Test
         void jacocoReportDependsOnIntegrationTest() {
-            val buildResult = project.assertBuildSuccessfully("jacocoIntegrationTestReport");
+            var buildResult = project.assertBuildSuccessfully("jacocoIntegrationTestReport");
 
-            val successfullyExecutedTasks = buildResult.getTasks().stream()
+            var successfullyExecutedTasks = buildResult.getTasks().stream()
                 .map(BuildTask::getPath)
                 .collect(toList());
             assertThat(successfullyExecutedTasks)
@@ -145,9 +144,9 @@ class FinalizeByJacocoPluginFunctionalTest {
 
         @Test
         void jacocoCoverageVerificationDependsOnIntegrationTest() {
-            val buildResult = project.assertBuildSuccessfully("jacocoIntegrationTestCoverageVerification");
+            var buildResult = project.assertBuildSuccessfully("jacocoIntegrationTestCoverageVerification");
 
-            val successfullyExecutedTasks = buildResult.getTasks().stream()
+            var successfullyExecutedTasks = buildResult.getTasks().stream()
                 .map(BuildTask::getPath)
                 .collect(toList());
             assertThat(successfullyExecutedTasks)
