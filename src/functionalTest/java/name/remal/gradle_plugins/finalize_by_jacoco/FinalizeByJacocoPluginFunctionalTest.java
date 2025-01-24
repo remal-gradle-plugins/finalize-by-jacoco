@@ -1,11 +1,13 @@
 package name.remal.gradle_plugins.finalize_by_jacoco;
 
 import static java.lang.String.join;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
-import static name.remal.gradle_plugins.toolkit.testkit.GradleDependencyVersions.getExternalPluginToTestVersion;
-import static name.remal.gradle_plugins.toolkit.testkit.GradleDependencyVersions.getJUnitVersion;
+import static name.remal.gradle_plugins.toolkit.testkit.TestClasspath.getTestClasspathLibraryFilePaths;
+import static name.remal.gradle_plugins.toolkit.testkit.TestClasspath.getTestClasspathLibraryVersion;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.nio.file.Path;
 import lombok.RequiredArgsConstructor;
 import name.remal.gradle_plugins.toolkit.testkit.functional.GradleProject;
 import org.gradle.testkit.runner.BuildTask;
@@ -28,12 +30,31 @@ class FinalizeByJacocoPluginFunctionalTest {
                 test.line("useJUnitPlatform()");
             });
 
-            build.addMavenCentralRepository();
+            build.line("repositories { mavenCentral() }");
+
             build.block("dependencies", deps -> {
-                deps.line("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
-                deps.line("testImplementation 'org.junit.jupiter:junit-jupiter-api'");
-                deps.line("testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'");
-                deps.line("testRuntimeOnly 'org.junit.platform:junit-platform-launcher'");
+                deps.line(
+                    "testImplementation files(%s)",
+                    getTestClasspathLibraryFilePaths("org.junit.jupiter:junit-jupiter-api").stream()
+                        .map(Path::toString)
+                        .map(path -> "'" + deps.escapeString(path) + "'")
+                        .collect(joining(", "))
+                );
+
+                deps.line(
+                    "testRuntimeOnly files(%s)",
+                    getTestClasspathLibraryFilePaths("org.junit.jupiter:junit-jupiter-engine").stream()
+                        .map(Path::toString)
+                        .map(path -> "'" + deps.escapeString(path) + "'")
+                        .collect(joining(", "))
+                );
+                deps.line(
+                    "testRuntimeOnly files(%s)",
+                    getTestClasspathLibraryFilePaths("org.junit.platform:junit-platform-launcher").stream()
+                        .map(Path::toString)
+                        .map(path -> "'" + deps.escapeString(path) + "'")
+                        .collect(joining(", "))
+                );
             });
         });
 
@@ -97,7 +118,7 @@ class FinalizeByJacocoPluginFunctionalTest {
         void beforeEach() {
             project.getBuildFile().applyPlugin(
                 "name.remal.test-source-sets",
-                getExternalPluginToTestVersion("name.remal.test-source-sets")
+                getTestClasspathLibraryVersion("name.remal.test-source-sets:name.remal.test-source-sets.gradle.plugin")
             );
             project.getBuildFile().line("testSourceSets.create('integrationTest')");
 
