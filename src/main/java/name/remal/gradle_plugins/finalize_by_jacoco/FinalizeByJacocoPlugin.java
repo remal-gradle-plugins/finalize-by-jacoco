@@ -1,9 +1,9 @@
 package name.remal.gradle_plugins.finalize_by_jacoco;
 
 import static java.util.Collections.emptyList;
+import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toUnmodifiableList;
 import static name.remal.gradle_plugins.toolkit.ExtensionContainerUtils.getOptionalExtension;
-import static name.remal.gradle_plugins.toolkit.PredicateUtils.not;
 import static name.remal.gradle_plugins.toolkit.TaskUtils.onlyIfWithReason;
 
 import java.io.File;
