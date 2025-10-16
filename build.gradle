@@ -28,7 +28,7 @@ apply plugin: 'name.remal.toolkit.build-logic'
 apply plugin: 'java-gradle-plugin'
 
 dependencies {
-    functionalTestAdditionalClasspath 'name.remal.test-source-sets:name.remal.test-source-sets.gradle.plugin:5.0.2'
+    functionalTestAdditionalClasspath 'name.remal.test-source-sets:name.remal.test-source-sets.gradle.plugin:5.0.3'
 }
 
 gradlePlugin {
