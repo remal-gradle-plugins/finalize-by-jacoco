@@ -37,7 +37,6 @@ gradlePlugin {
             id = 'name.remal.finalize-by-jacoco'
             implementationClass = 'name.remal.gradle_plugins.finalize_by_jacoco.FinalizeByJacocoPlugin'
             displayName = 'Finalize Test tasks with Jacoco tasks'
-            description = property('repository-description')
         }
     }
 }
