@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static name.remal.gradle_plugins.toolkit.testkit.TestClasspath.getTestClasspathLibraryFilePaths;
 import static name.remal.gradle_plugins.toolkit.testkit.TestClasspath.getTestClasspathLibraryVersion;
+import static name.remal.gradle_plugins.toolkit.testkit.functional.generator.utils.MavenCentralRepositoryUtils.addMavenCentralRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.file.Path;
@@ -30,7 +31,7 @@ class FinalizeByJacocoPluginFunctionalTest {
                 test.line("useJUnitPlatform()");
             });
 
-            build.line("repositories { mavenCentral() }");
+            addMavenCentralRepository(build);
 
             build.block("dependencies", deps -> {
                 deps.line(
